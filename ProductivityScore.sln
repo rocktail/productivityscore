@@ -3,9 +3,50 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scr", "scr", "{E8295AA2-925A-4200-85DF-F503A9403597}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{4AD41F1D-C049-439E-9D87-CADF5AAA091F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{8AA97C84-1549-4E07-BEF9-9B788BC02006}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5500FFF6-4BEB-43EF-A60D-25551DD0E94A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{6659E097-A07C-4036-90A0-66828ABE7D16}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FC753879-3B1D-4A2C-8609-566E1B9BDD6B}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProductivityEvent", "ProductivityEvent", "{51F20555-2B98-4537-9632-B9B4856EDB11}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Productivity.API", "Productivity.API", "{6138C8C1-1327-4FB8-8560-9923D02F3E3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Productivity.API", "src\Services\ProductivityEvent\Productivity.API\Productivity.API.csproj", "{82F778F8-F381-4D24-812C-35B7B282E61A}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{82F778F8-F381-4D24-812C-35B7B282E61A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82F778F8-F381-4D24-812C-35B7B282E61A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82F778F8-F381-4D24-812C-35B7B282E61A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82F778F8-F381-4D24-812C-35B7B282E61A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8AA97C84-1549-4E07-BEF9-9B788BC02006} = {E8295AA2-925A-4200-85DF-F503A9403597}
+		{5500FFF6-4BEB-43EF-A60D-25551DD0E94A} = {E8295AA2-925A-4200-85DF-F503A9403597}
+		{6659E097-A07C-4036-90A0-66828ABE7D16} = {E8295AA2-925A-4200-85DF-F503A9403597}
+		{51F20555-2B98-4537-9632-B9B4856EDB11} = {8AA97C84-1549-4E07-BEF9-9B788BC02006}
+		{6138C8C1-1327-4FB8-8560-9923D02F3E3B} = {51F20555-2B98-4537-9632-B9B4856EDB11}
+		{82F778F8-F381-4D24-812C-35B7B282E61A} = {6138C8C1-1327-4FB8-8560-9923D02F3E3B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A98FA850-3944-4146-9B0F-7B54107C5125}
