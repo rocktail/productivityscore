@@ -1,30 +1,29 @@
-using System.Net;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.Functions.Worker;
-using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
+using HttpTriggerAttribute = Microsoft.Azure.Functions.Worker.HttpTriggerAttribute;
 
 namespace ProductivityEvent.API
 {
     public class ProductivityEventTrigger
     {
-        private readonly ILogger _logger;
-
-        public ProductivityEventTrigger(ILoggerFactory loggerFactory)
-        {
-            _logger = loggerFactory.CreateLogger<ProductivityEventTrigger>();
-        }
-
         [Function("ProductivityEventTrigger")]
-        public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req)
+        [TableOutput("ProductivityEvent", Connection = "AzureWebJobsStorage")]
+        public static ProductivityEventData Run(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post")] HttpRequest req,
+            [TableInput("ProductivityEvent" , "PartitionKey", "{queueTrigger}")] ProductivityEventData productivityEventDataInput,
+            FunctionContext context)
         {
-            _logger.LogInformation("C# HTTP trigger function processed a request.");
+            var logger = context.GetLogger("ProductivityEventTrigger");
+            logger.LogInformation("C# HTTP trigger function processed a request.");
 
-            var response = req.CreateResponse(HttpStatusCode.OK);
-            response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
-
-            response.WriteString("Welcome to Azure Functions!");
-
-            return response;
+            return new ProductivityEventData
+            {
+                PartitionKey = "queue",
+                RowKey = Guid.NewGuid().ToString(),
+                EventStart = true,
+                ProductivityScore = 3.0
+            };
         }
     }
 }
