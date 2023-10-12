@@ -24,19 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProductivityEvent", "Produc
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Productivity.API", "Productivity.API", "{6138C8C1-1327-4FB8-8560-9923D02F3E3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Productivity.API", "src\Services\ProductivityEvent\Productivity.API\Productivity.API.csproj", "{82F778F8-F381-4D24-812C-35B7B282E61A}"
-EndProject
 Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{82F778F8-F381-4D24-812C-35B7B282E61A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{82F778F8-F381-4D24-812C-35B7B282E61A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{82F778F8-F381-4D24-812C-35B7B282E61A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{82F778F8-F381-4D24-812C-35B7B282E61A}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
@@ -46,7 +34,6 @@ Global
 		{6659E097-A07C-4036-90A0-66828ABE7D16} = {E8295AA2-925A-4200-85DF-F503A9403597}
 		{51F20555-2B98-4537-9632-B9B4856EDB11} = {8AA97C84-1549-4E07-BEF9-9B788BC02006}
 		{6138C8C1-1327-4FB8-8560-9923D02F3E3B} = {51F20555-2B98-4537-9632-B9B4856EDB11}
-		{82F778F8-F381-4D24-812C-35B7B282E61A} = {6138C8C1-1327-4FB8-8560-9923D02F3E3B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A98FA850-3944-4146-9B0F-7B54107C5125}
