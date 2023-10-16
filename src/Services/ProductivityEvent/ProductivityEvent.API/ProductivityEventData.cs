@@ -1,6 +1,8 @@
 ﻿using Azure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
+using System.Diagnostics;
+using System.Reflection.Metadata.Ecma335;
 
 namespace ProductivityEvent.API
 {
@@ -12,16 +14,17 @@ namespace ProductivityEvent.API
             this.RowKey = Guid.NewGuid().ToString();
             this.EventStart = eventStart;
             this.ProductivityScore = productivityScore;
+            this.ETag = ETag.All;
         }
 
         public string PartitionKey { get; set; }
         public string RowKey { get; set;}
         public double ProductivityScore { get; set;}
         public bool EventStart { get; set;}
-        public DateTimeOffset? Timestamp { get => DateTimeOffset.Now; set => throw new NotImplementedException(); }
-        public ETag ETag { get => new("eTag"); set => throw new NotImplementedException(); }
-        DateTimeOffset ITableEntity.Timestamp { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        string ITableEntity.ETag { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public DateTimeOffset? Timestamp { get; set; }
+        public ETag ETag { get; set; }
+        DateTimeOffset ITableEntity.Timestamp { get => this.Timestamp.GetValueOrDefault(); set => this.Timestamp = value; }
+        string ITableEntity.ETag { get => this.ETag.ToString(); set => this.ETag = new(value); }
 
         public void ReadEntity(IDictionary<string, EntityProperty> properties, OperationContext operationContext)
         {
@@ -61,11 +64,11 @@ namespace ProductivityEvent.API
             var properties = new Dictionary<string, EntityProperty>
             {
                 { "PartitionKey", new EntityProperty(this.PartitionKey)},
-                { "PartitionKey", new EntityProperty(this.PartitionKey)},
-                { "PartitionKey", new EntityProperty(this.PartitionKey)},
-                { "PartitionKey", new EntityProperty(this.PartitionKey)},
-                { "PartitionKey", new EntityProperty(this.PartitionKey)},
-                { "PartitionKey", new EntityProperty(this.PartitionKey)},
+                { "RowKey", new EntityProperty(this.RowKey)},
+                { "ProductivityScore", new EntityProperty(this.ProductivityScore)},
+                { "EventStart", new EntityProperty(this.EventStart)},
+                { "Timestamp", new EntityProperty(this.Timestamp)},
+                { "ETag", new EntityProperty(this.ETag.ToString())}
             };
 
             return properties;
