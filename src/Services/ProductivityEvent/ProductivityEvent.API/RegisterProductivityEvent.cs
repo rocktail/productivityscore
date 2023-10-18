@@ -6,19 +6,19 @@ using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 using HttpTriggerAttribute = Microsoft.Azure.Functions.Worker.HttpTriggerAttribute;
 
-//?EventStart=Yes&ProductivityScore=-3
+//?EventStart=Yes&GetProductivityScore=-3
 namespace ProductivityEvent.API
 {
-    public class ProductivityEventRegistration
+    public class RegisterProductivityEvent
     {
-        [Function("ProductivityEventRegistration")]
+        [Function("RegisterProductivityEvent")]
         //[TableOutput("ProductivityEvent", Connection = "AzureWebJobsStorage")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
             //[TableInput("ProductivityEvent" , "PartitionKey", "RowKey")] ProductivityEventData productivityEventDataInput,
             FunctionContext context)
         {
-            var logger = context.GetLogger("ProductivityEventRegistration");
+            var logger = context.GetLogger("RegisterProductivityEvent");
             logger.LogInformation("C# HTTP trigger function processed a request.");
 
             ProductivityEventData productivityEventData = new ProductivityEventData(req.Query["EventStart"].Equals("Yes"), double.Parse(req.Query["ProductivityScore"].ToString()));
@@ -32,7 +32,7 @@ namespace ProductivityEvent.API
             TableOperation insertOperation = TableOperation.Insert(productivityEventData);
             table.ExecuteAsync(insertOperation);
 
-            var actionResult = (ActionResult)new OkObjectResult(String.Format("Partition Key {0}, RowKey = {1}; EventStart = {2}; ProductivityScore = {3}", productivityEventData.PartitionKey, productivityEventData.RowKey, productivityEventData.EventStart, productivityEventData.ProductivityScore));
+            var actionResult = (ActionResult)new OkObjectResult(String.Format("Partition Key {0}, RowKey = {1}; EventStart = {2}; GetProductivityScore = {3}", productivityEventData.PartitionKey, productivityEventData.RowKey, productivityEventData.EventStart, productivityEventData.ProductivityScore));
             return actionResult;
         }
     }

@@ -10,11 +10,17 @@ namespace ProductivityEvent.API
     {
         public ProductivityEventData(bool eventStart, double productivityScore)
         {
-            this.PartitionKey = "queue";
+            this.PartitionKey = "productivityEvent";
             this.RowKey = Guid.NewGuid().ToString();
             this.EventStart = eventStart;
             this.ProductivityScore = productivityScore;
             this.ETag = ETag.All;
+        }
+
+        public ProductivityEventData()
+        {
+            this.PartitionKey = "productivityEvent";
+            this.RowKey = Guid.NewGuid().ToString();
         }
 
         public string PartitionKey { get; set; }
@@ -38,7 +44,7 @@ namespace ProductivityEvent.API
                 this.RowKey = propRowKey.StringValue;
             }
 
-            if (properties.TryGetValue("ProductivityScore", out var propProductivityScore) && propProductivityScore.PropertyType == EdmType.Double)
+            if (properties.TryGetValue("GetProductivityScore", out var propProductivityScore) && propProductivityScore.PropertyType == EdmType.Double)
             {
                 this.ProductivityScore = propProductivityScore.DoubleValue.Value;
             }
@@ -65,7 +71,7 @@ namespace ProductivityEvent.API
             {
                 { "PartitionKey", new EntityProperty(this.PartitionKey)},
                 { "RowKey", new EntityProperty(this.RowKey)},
-                { "ProductivityScore", new EntityProperty(this.ProductivityScore)},
+                { "GetProductivityScore", new EntityProperty(this.ProductivityScore)},
                 { "EventStart", new EntityProperty(this.EventStart)},
                 { "Timestamp", new EntityProperty(this.Timestamp)},
                 { "ETag", new EntityProperty(this.ETag.ToString())}
